@@ -1,0 +1,70 @@
+﻿@model System.Data.DataTable
+@{
+    ViewBag.Title = "Index";
+}
+<br/>
+<a style="margin-left:1050px" , href="@Url.Action("Create","Product")">
+    <button type="button" class="btn btn-primary">Ürün Ekle</button>
+    <br/>
+</a>
+<br/>
+<table class="table table-bordered  table-condensed">
+    <tr>
+        <th>Ürün İsmi</th>
+        <th>Fiyat</th>
+        <th>Stok</th>
+        <th>Güncelle</th>
+        <th>Sil</th>
+    </tr>
+    @for (int i = 0; i < Model.Rows.Count; i++)
+    {
+        <tr>
+            <td>@Model.Rows[i][1]</td>
+            <td>@Model.Rows[i][2]</td>
+            <td>@Model.Rows[i][3]</td>
+            <td>
+                <a href="@Url.Action("Edit","Product",new { @id = Model.Rows[i][0] })">
+                    <button type="button" class="btn btn-success">Güncelle</button>
+                </a>
+            </td>
+            <td>          
+                    <button type="button" class="btn btn-danger"data-toggle="modal" data-target="#Modal1">Sil</button>
+                    <div class="modal" id="Modal1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2 class="modal-title">Silme İşlemi Gerçekleştiriliyor..</h2>
+                                </div>
+                                <form>
+                                    <div class="modal-body">
+                                        <label>
+                                            Silmek istediğinizden emin misiniz.
+                                        </label>
+                                    </div>
+                                    <div class="modal-body">
+                                        <label>
+                                            <a href="@Url.Action("Delete","Product",new { @id = Model.Rows[i][0] })">
+                                                <button type="button" class="btn btn-danger">Sil</button>
+                                            </a>
+                                        </label>
+                                        <label>
+                                            <a href="https://localhost:44357/Product">
+                                                <button type="button" class="btn btn-success">Vazgeç</button>
+                                            </a>
+                                        </label>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>             
+            </td>
+        </tr>
+    }    
+</table>
+
+
+
+
+
+
